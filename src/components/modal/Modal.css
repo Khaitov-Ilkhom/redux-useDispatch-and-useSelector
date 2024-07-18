@@ -1,0 +1,24 @@
+.modal{
+  width: 500px;
+  height: 300px;
+  background: rgb(220, 249, 250);
+}
+
+.overlay{
+  position: fixed;
+  z-index: -1;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  transition: 0.3s;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.53);
+}
+
+.active{
+  z-index: 5;
+  opacity: 1;
+}

@@ -8,6 +8,7 @@ import master_card from "../../images/master-card.png"
 import pay_pal from "../../images/pay-pal.png"
 import {SlBasketLoaded} from "react-icons/sl";
 import {useDispatch} from "react-redux";
+import {Bounce, toast, ToastContainer} from "react-toastify";
 
 
 const SingleComponent = () => {
@@ -36,8 +37,42 @@ const SingleComponent = () => {
   //       </div>
   //   );
   // }
+  const notify = () => toast.success('The product has been added to cart!', {
+    position: "top-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    transition: Bounce,
+  });
+  const notifyLiked = () => toast.success('Liked product!', {
+    position: "top-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    transition: Bounce,
+  });
+  const disLiked = () => toast.warn('Disliked product!', {
+    position: "top-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    transition: Bounce,
+  });
 
   const addToCart = (data) => {
+    notify()
     dispatch({type: "ADD_TO_CART", data: {...data, stock}})
   }
 
@@ -125,8 +160,8 @@ const SingleComponent = () => {
                   </button>
                   <button onClick={() => setLike(!like)}
                           className="bg-sky-100 text-sky-400 p-3 rounded-lg">{like ?
-                      <span><FaRegHeart/></span> :
-                      <span className="text-red-600"><FaHeart/></span>}</button>
+                      (disLiked(), <span><FaRegHeart/></span>) :
+                      (notifyLiked(), <span className="text-red-600"><FaHeart/></span>)}</button>
                 </div>
               </div>
             </div>
@@ -147,6 +182,20 @@ const SingleComponent = () => {
         <div className="px-[150px] mt-[50px]">
           <p className="text-gray-700 text-lg leading-7 font-normal font-['Lato']">{data.description} {data.description}</p>
         </div>
+        <ToastContainer
+            className="mt-[100px]"
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            transition: Bounce
+        />
       </div>
   )
 }

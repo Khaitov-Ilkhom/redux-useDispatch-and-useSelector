@@ -1,10 +1,23 @@
 import {CiCircleRemove} from "react-icons/ci";
 import {useDispatch, useSelector} from "react-redux";
+import {Bounce, toast, ToastContainer} from "react-toastify";
 
 const BasketComponent = () => {
+  const notify = () => toast.success("The product has been removed!", {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    transition: Bounce,
+  });
   const state = useSelector(store => store)
   const dispatch = useDispatch()
   const removeCard = (id) => {
+    notify()
     dispatch({type: "REMOVE_CARD", id})
   }
 
@@ -55,6 +68,20 @@ const BasketComponent = () => {
           )
         }
         </tbody>
+        <ToastContainer
+            className="mt-[100px]"
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            transition: Bounce
+        />
       </table>
   )
 }
